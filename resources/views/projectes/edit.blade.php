@@ -8,7 +8,7 @@
     <label>Codi Projecte</label><br>
     <input disabled value="{{$projecte->project_code}}"/><br>
     <label>Estat</label><br>
-    <select type="number" id="state" name="state" value="{{$projecte->state}}                    n ">
+    <select type="number" id="state" name="state" value="{{$projecte->state}}">
         <option>PLANIFICACIO</option>
         <option>EN_CURS</option>
         <option>PAUSAT</option>

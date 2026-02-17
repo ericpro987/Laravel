@@ -89,10 +89,16 @@ class ProjecteController extends Controller
 public function updateEstat(Request $request, string $id)
 {
     $Projecte = Projecte::all()->where('id','=', $id)->first();
-    $Projecte->estat = $request->input('estat');
+    $Projecte->state = $request->input('state');
     $Projecte->save();
     return redirect()->route('projectes.index')->with('success', 'Estat actualitzat correctament');
 }
+public function assignarEquip(Request $request, string $id){
+    $projecte = Projecte::all()->where('id','=', $id)->first();
+    
+
+}
+
     /**
      * Remove the specified resource from storage.
      */

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjecteController;
+use App\Http\Controllers\TicketsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,10 @@ Route::post('/update_projectes/{idProjecte}',[ProjecteController::class,'update'
 Route::get('/edit_projectes/{idProjecte}/estat',[ProjecteController::class,'canviarEstat'])->name('projectes.editEstat');
 Route::post('/edit_projectes/{idProjecte}/updateestat',[ProjecteController::class,'updateEstat'])->name('projectes.updateEstat');
 
+Route::get('/index_tickets',[TicketsController::class,'index'])->name('tickets.index');
+Route::get('/create_tickets',[TicketsController::class,'create'])->name('tickets.create');
+Route::post('/create_tickets',[TicketsController::class,'store'])->name('tickets.store');
+Route::get('/show_tickets/{idTickets}',[TicketsController::class,'show'])->name('tickets.show');
 
 Auth::routes();
 
