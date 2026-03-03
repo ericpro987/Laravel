@@ -95,7 +95,6 @@ public function updateEstat(Request $request, string $id)
 }
 public function assignarEquip(Request $request, string $id){
     $projecte = Projecte::all()->where('id','=', $id)->first();
-    
 
 }
 

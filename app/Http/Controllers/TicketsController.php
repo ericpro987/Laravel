@@ -40,17 +40,53 @@ class TicketsController extends Controller
         $ticket->save();
         return redirect()->route('tickets.show', $ticket->id)->with('success', 'Ticket agregado correctament');
     }
-    public function show($id){
-        return view('tickets.show');
+    public function show($id)
+    {
+        $ticket = Tickets::all()->where('id', $id)->first();
+        return view('tickets.show', compact('ticket'));
     }
-    public function edit($id){
 
+    public function edit($id){
+        $ticket = Tickets::all()->where('id','=', $id)->first();
+        return view('tickets.edit',compact('ticket'));
     }
     public function update(Request $request, $id){
+        $ticket = Tickets::all()->where('id','=', $id)->first();
+        $ticket->titol = $request->input("titol");
+        $ticket->descripcio = $request->input('descripcio');
+        $ticket->estat = $request->input('estat');
+        $ticket->prioritat = $request->input('prioritat');
+        $ticket->hores_estimades = $request->input('hores_estimades');
+        $ticket->data_deadline = $request->input('data_deadline');
+        $ticket->save();
+        return redirect()->route('tickets.show', $ticket->id)->with('success', 'Ticket actualitzat correctament');
 
     }
-    public function destroy($id){
+    public function canviarEstat(Request $request, $id){
+        $ticket = Tickets::all()->where('id','=',$id)->first();
+        $estat = $ticket->estat;
+        if($estat == 'NOU'){
+            $ticket->estat = 'ASSIGNAT';
+            $ticket->save();
+        }
+        else if($estat == 'ASSIGNAT'){
+            $ticket->estat = 'EN_PROGRES';
+            $ticket->save();
+        }else if($estat == 'EN_PROGRES'){
+            $ticket->estat = 'EN_REVISIO';
+            $ticket->save();
+        }else if($estat == 'EN_REVISIO'){
+            $ticket->estat = 'TANCAT';
+            $ticket->save();
+        }else if($estat == 'TANCAT'){
+            $ticket->estat = 'EN_REVISIO';
+        }
+        return redirect()->route('tickets.show', $id)->with('success', 'Estat actualitzat correctament');
+    }
 
+    public function destroy($id){
+        Tickets::all()->where('id', '=',$id)->first()->delete();
+        return redirect()->route('tickets.index')->with('success', 'Ticket eliminat correctament');
     }
 
 }

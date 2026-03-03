@@ -39,6 +39,7 @@
         </select><br>
         <h2>Ticket pare</h2><br>
         <select id="ticket_pare_id" name="ticket_pare_id">
+            <option></option>
             @foreach($tickets as $ticket)
                 <option value="{{$ticket->id}}">{{$ticket->id}}</option>
             @endforeach
